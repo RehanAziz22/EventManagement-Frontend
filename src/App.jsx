@@ -42,7 +42,7 @@ export default function App() {
     { path: '/login', element: !user ? <LoginPage onLogin={(userData) => setUser(userData)} /> : <Navigate to="/" /> },
     { path: '/signup', element: !user ? <SignupPage /> : <Navigate to="/" /> },
     { path: '/organizer', element: role === "organizer" ? <OrganizerDashboard handleLogout={handleLogout} /> : <Navigate to="/" replace /> },
-    { path: '/exhibitor', element: role === "exhibitor" ? <ExhibitorDashboard handleLogout={handleLogout} /> : <Navigate to="/" replace /> }
+    { path: '/exhibitor', element: role === "exhibitor" ? <ExhibitorDashboard handleLogout={handleLogout}  user={user}/> : <Navigate to="/" replace /> }
   ]);
 
   return <RouterProvider router={router} />;

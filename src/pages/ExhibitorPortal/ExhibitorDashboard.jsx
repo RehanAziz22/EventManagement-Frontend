@@ -13,7 +13,9 @@ import OrganizerSearch from './OrganizerSearch';
 import { useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import EventIcon from '@mui/icons-material/Event';
+import ChatIcon from '@mui/icons-material/Chat';
 import ContactlessIcon from '@mui/icons-material/Contactless';
+import ChatPage from './ChatPage';
 
 // Dummy Components for Pages
 const DashboardPage = () => <div>Dashboard Page</div>;
@@ -38,6 +40,18 @@ const NAVIGATION = [
     segment: 'contact',
     title: 'Contact',
     icon: <ContactlessIcon />,
+  },
+  {
+    kind: 'divider',
+  },
+  {
+    kind: 'header',
+    title: 'User',
+  },  
+  {
+    segment: 'chats',
+    title: 'Chats',
+    icon: <ChatIcon />,
   },
   {
     segment: 'logout',
@@ -89,7 +103,7 @@ const Skeleton = styled('div')(({ theme, height }) => ({
 }));
 
 export default function ExhibitorDashboard(props) {
-  const { window, children ,handleLogout } = props;
+  const { window, children ,handleLogout,user } = props;
 
   const router = useDemoRouter('/expos');
   const navigate = useNavigate()
@@ -108,6 +122,8 @@ export default function ExhibitorDashboard(props) {
         return <OrganizerSearch router={router} />;
       case `/expos/register/${router.params.id}`:
         return <RegisterExpo router={router} />;
+        case '/chats':
+          return <ChatPage user={user}/>;
         case '/logout':
           return handleLogout();
       default:
